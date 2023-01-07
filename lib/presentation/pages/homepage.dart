@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:healthtracker/main.dart';
 import 'package:healthtracker/presentation/Style.dart';
+import 'package:healthtracker/presentation/pages/water_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../widgets/category_card.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
           children: [
             SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -41,7 +42,7 @@ class HomePage extends StatelessWidget {
                               ),
                               Text(
                                 "John Smith",
-                                style: style.titleFontStyle,
+                                style: style.subtitleFontStyle.copyWith(color: style.fontColor),
                               ),
                             ],
                           ),
@@ -53,16 +54,16 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: CategoryCard(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ProgressCard(
                         title: "Today's Progress",
                         subtitle: "You got this!",
                         body: Column(
                           children: [
                             DailyTracker(
                               icon: Icons.cookie,
-                              currentValue: "800",
-                              maxValue: "1500",
+                              currentValue: "800 cal",
+                              maxValue: "1500 cal",
                               style: style,
                               progress: 0.4,
                             ),
@@ -70,9 +71,9 @@ class HomePage extends StatelessWidget {
                               height: 8,
                             ),
                             DailyTracker(
-                              icon: FontAwesomeIcons.shoePrints,
-                              currentValue: "3,000",
-                              maxValue: "10,00",
+                              icon: FontAwesomeIcons.personWalking,
+                              currentValue: "3,000 steps",
+                              maxValue: "10,00 steps",
                               style: style,
                               progress: 0.3,
                             ),
@@ -81,95 +82,56 @@ class HomePage extends StatelessWidget {
                             ),
                             DailyTracker(
                               icon: FontAwesomeIcons.glassWater,
-                              currentValue: "56",
-                              maxValue: "128",
+                              currentValue: "56 oz",
+                              maxValue: "128 oz",
                               style: style,
                               progress: 0.4,
                             ),
                           ],
                         ),
-                        color: Colors.white,
+                        color: style.foreGroundColor,
                       ),
                     ),
-                    Text(
-                      "Categories",
-                      style: style.titleFontStyle,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://cdn.discordapp.com/attachments/954926822024417331/1060709458579292231/image.png"),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text("Water",
-                                    style: style.titleFontStyle.copyWith(color: Colors.white, fontSize: 34)),
-                              ),
-                            ),
+                    GridView.count(
+                      padding: EdgeInsets.zero,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      childAspectRatio: 4 / 3.5,
+                      children: [
+                        ...[
+                          CategoryCard(
+                            style: style,
+                            imageURL:
+                                "https://cdn.discordapp.com/attachments/954926822024417331/1060709458579292231/image.png",
+                            title: "My Water",
+                            useDarkText: false,
+                            onTap: () {},
                           ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://cdn.discordapp.com/attachments/954926822024417331/1060713164175585280/image.png"),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text("Nutrition", style: style.titleFontStyle.copyWith(fontSize: 34)),
-                              ),
-                            ),
+                          CategoryCard(
+                            style: style,
+                            imageURL:
+                                "https://cdn.discordapp.com/attachments/954926822024417331/1060713164175585280/image.png",
+                            title: " My Diet",
+                            useDarkText: true,
                           ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://cdn.discordapp.com/attachments/954926822024417331/1060715873498845224/image.png"),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text("Health", style: style.titleFontStyle.copyWith(fontSize: 34)),
-                              ),
-                            ),
+                          CategoryCard(
+                            style: style,
+                            imageURL:
+                                "https://cdn.discordapp.com/attachments/954926822024417331/1060715873498845224/image.png",
+                            title: "My Health",
+                            useDarkText: true,
                           ),
-                        ),
-                      ),
+                          CategoryCard(
+                            style: style,
+                            imageURL:
+                                "https://cdn.discordapp.com/attachments/954926822024417331/1060731800252596324/image.png",
+                            title: "My Activity",
+                            useDarkText: true,
+                          )
+                        ]
+                      ],
                     ),
                   ],
                 ),
@@ -183,6 +145,69 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({
+    Key? key,
+    required this.style,
+    required this.imageURL,
+    required this.title,
+    required this.useDarkText,
+    this.onTap,
+  }) : super(key: key);
+
+  final Style style;
+  final String imageURL;
+  final String title;
+  final bool useDarkText;
+  final Function? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => WaterPage()),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromARGB(108, 180, 180, 180),
+              blurRadius: 10,
+              offset: Offset(0, 5),
+            )
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(imageURL),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Container(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  title,
+                  style: style.titleFontStyle.copyWith(
+                    color: useDarkText ? style.fontColor : Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -226,9 +251,9 @@ class DailyTracker extends StatelessWidget {
           barRadius: const Radius.circular(12),
           lineHeight: 12,
           animation: true,
-          leading: Icon(icon, color: style.accentColor),
-          backgroundColor: style.primaryColor,
-          progressColor: style.accentColor,
+          leading: Icon(icon, color: style.emphasisColor),
+          backgroundColor: style.accentColor,
+          progressColor: style.emphasisColor,
           percent: progress,
         ),
       ],

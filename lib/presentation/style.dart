@@ -22,23 +22,22 @@ abstract class Style {
 
 class LightStyle extends Style {
   @override
-  Color get primaryColor => Color(0xffAED6BD);
+  Color get primaryColor => Color(0xffE0E4DD);
 
   @override
-  Color get secondaryColor => Color(0xff1DABED);
+  Color get secondaryColor => Color(0xff94A187);
 
   @override
-  Color get accentColor => Color(0xffFB9274);
+  Color get accentColor => Color(0xffaed6bd);
 
   @override
-  Color get emphasisColor => Color(0xff1ed760);
+  Color get emphasisColor => Color(0xfffb9274);
 
   @override
-  Color get backGroundColor => Color(0xffECE2F4);
+  Color get backGroundColor => Color(0xffeff4fb);
 
   @override
-  Color get foreGroundColor => Color(0xffF5F1F9);
-
+  Color get foreGroundColor => Colors.white;
   @override
   Color get fontColor => Color(0xff0A0A0B);
 
