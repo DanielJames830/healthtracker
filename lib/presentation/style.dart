@@ -22,24 +22,24 @@ abstract class Style {
 
 class LightStyle extends Style {
   @override
-  Color get primaryColor => Color(0xffE0E4DD);
+  Color get primaryColor => const Color(0xff08A1D9);
 
   @override
-  Color get secondaryColor => Color(0xff94A187);
+  Color get secondaryColor => Color.fromARGB(255, 244, 221, 187);
 
   @override
-  Color get accentColor => Color(0xffaed6bd);
+  Color get accentColor => const Color(0xffaed6bd);
 
   @override
-  Color get emphasisColor => Color(0xfffb9274);
+  Color get emphasisColor => Color.fromARGB(255, 251, 195, 98);
 
   @override
-  Color get backGroundColor => Color(0xffeff4fb);
+  Color get backGroundColor => const Color(0xffeff4fb);
 
   @override
   Color get foreGroundColor => Colors.white;
   @override
-  Color get fontColor => Color(0xff0A0A0B);
+  Color get fontColor => const Color(0xff0A0A0B);
 
   @override
   TextStyle get titleFontStyle => GoogleFonts.inter(
@@ -61,19 +61,19 @@ class LightStyle extends Style {
 
 class DarkStyle extends Style {
   @override
-  Color get primaryColor => Color.fromARGB(255, 247, 247, 242);
+  Color get primaryColor => const Color.fromARGB(255, 247, 247, 242);
 
   @override
-  Color get emphasisColor => Color(0xff1B7EDA);
+  Color get emphasisColor => const Color(0xff1B7EDA);
 
   @override
-  Color get secondaryColor => Color(0xffF9CE4E);
+  Color get secondaryColor => const Color(0xffF9CE4E);
 
   @override
-  Color get backGroundColor => Color(0xff071F36);
+  Color get backGroundColor => const Color(0xff071F36);
 
   @override
-  Color get foreGroundColor => Color(0xff0C345A);
+  Color get foreGroundColor => const Color(0xff0C345A);
 
   @override
   TextStyle get titleFontStyle => GoogleFonts.pacifico(

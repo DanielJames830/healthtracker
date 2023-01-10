@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:healthtracker/main.dart';
 import 'package:healthtracker/presentation/Style.dart';
-import 'package:healthtracker/presentation/pages/water_page.dart';
+import 'package:healthtracker/presentation/pages/diet_page.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import '../widgets/category_card.dart';
+import '../widgets/progress_card.dart';
 import '../widgets/user_icon.dart';
 
 class HomePage extends StatelessWidget {
@@ -61,21 +61,12 @@ class HomePage extends StatelessWidget {
                         body: Column(
                           children: [
                             DailyTracker(
-                              icon: Icons.cookie,
+                              icon: FontAwesomeIcons.fire,
                               currentValue: "800 cal",
                               maxValue: "1500 cal",
                               style: style,
                               progress: 0.4,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            DailyTracker(
-                              icon: FontAwesomeIcons.personWalking,
-                              currentValue: "3,000 steps",
-                              maxValue: "10,00 steps",
-                              style: style,
-                              progress: 0.3,
+                              iconColor: Colors.orange,
                             ),
                             const SizedBox(
                               height: 8,
@@ -86,6 +77,18 @@ class HomePage extends StatelessWidget {
                               maxValue: "128 oz",
                               style: style,
                               progress: 0.4,
+                              iconColor: style.primaryColor,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            DailyTracker(
+                              icon: FontAwesomeIcons.personWalking,
+                              currentValue: "3,000 steps",
+                              maxValue: "10,00 steps",
+                              style: style,
+                              progress: 0.3,
+                              iconColor: Colors.amber,
                             ),
                           ],
                         ),
@@ -107,14 +110,14 @@ class HomePage extends StatelessWidget {
                                 "https://cdn.discordapp.com/attachments/954926822024417331/1060709458579292231/image.png",
                             title: "My Water",
                             useDarkText: false,
-                            onTap: () {},
                           ),
                           CategoryCard(
                             style: style,
                             imageURL:
                                 "https://cdn.discordapp.com/attachments/954926822024417331/1060713164175585280/image.png",
-                            title: " My Diet",
+                            title: "My Diet",
                             useDarkText: true,
+                            page: const DietPage(),
                           ),
                           CategoryCard(
                             style: style,
@@ -158,22 +161,27 @@ class CategoryCard extends StatelessWidget {
     required this.imageURL,
     required this.title,
     required this.useDarkText,
-    this.onTap,
+    this.page,
   }) : super(key: key);
 
   final Style style;
   final String imageURL;
   final String title;
   final bool useDarkText;
-  final Function? onTap;
+  final Widget? page;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => WaterPage()),
-      ),
+      onTap: () {
+        if (page != null) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => page!,
+              ));
+        }
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -222,8 +230,10 @@ class DailyTracker extends StatelessWidget {
     required this.maxValue,
     required this.icon,
     required this.progress,
+    required this.iconColor,
   }) : super(key: key);
 
+  final Color iconColor;
   final Style style;
   final double progress;
   final String currentValue;
@@ -251,8 +261,8 @@ class DailyTracker extends StatelessWidget {
           barRadius: const Radius.circular(12),
           lineHeight: 12,
           animation: true,
-          leading: Icon(icon, color: style.emphasisColor),
-          backgroundColor: style.accentColor,
+          leading: Icon(icon, color: iconColor),
+          backgroundColor: style.primaryColor,
           progressColor: style.emphasisColor,
           percent: progress,
         ),

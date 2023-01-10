@@ -40,14 +40,10 @@ class ProgressCard extends StatelessWidget {
               style: style.titleFontStyle.copyWith(fontSize: 20),
             ),
             Text(subtitle, style: style.subtitleFontStyle),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Divider(
-                color: style.fontColor,
-                height: 3,
-              ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(),
             ),
-            const SizedBox(height: 8),
             body,
           ],
         ),
