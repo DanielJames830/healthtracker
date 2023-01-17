@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,7 +15,7 @@ class DietPage extends HookWidget {
 
     final _value = useState<double>(0);
 
-    ValueNotifier<double> value = ValueNotifier(900);
+    ValueNotifier<double> value = ValueNotifier(342);
 
     return Scaffold(
       backgroundColor: style.backGroundColor,
@@ -40,98 +39,89 @@ class DietPage extends HookWidget {
                     height: 15,
                   ),
                   FittedBox(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "1500",
-                                  style: style.titleFontStyle,
-                                ),
-                                Text(
-                                  "goal".toUpperCase(),
-                                  style: style.subtitleFontStyle,
-                                ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "1500",
+                              style: style.titleFontStyle,
+                            ),
+                            Text(
+                              "goal".toUpperCase(),
+                              style: style.subtitleFontStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 24,
+                        ),
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            SimpleCircularProgressBar(
+                              mergeMode: true,
+                              backColor: style.emphasisColor,
+                              size: 200,
+                              progressStrokeWidth: 30,
+                              maxValue: 1500,
+                              valueNotifier: value,
+                              progressColors: [
+                                Color.fromARGB(255, 107, 178, 236),
+                                style.primaryColor,
                               ],
                             ),
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              SimpleCircularProgressBar(
-                                mergeMode: true,
-                                backColor: style.primaryColor,
-                                size: 200,
-                                progressStrokeWidth: 30,
-                                maxValue: 1500,
-                                valueNotifier: value,
-                                progressColors: [
-                                  style.secondaryColor,
-                                  style.emphasisColor,
+                            Container(
+                              width: 150,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: style.foreGroundColor,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color.fromARGB(108, 180, 180, 180),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 2),
+                                  )
                                 ],
                               ),
-                              Container(
-                                width: 150,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: style.foreGroundColor,
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color.fromARGB(108, 180, 180, 180),
-                                      blurRadius: 10,
-                                      offset: Offset(0, 2),
-                                    )
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${1500 - value.value.round()}",
+                                      style: style.titleFontStyle.copyWith(fontSize: 42),
+                                    ),
+                                    Text(
+                                      "kcal left".toUpperCase(),
+                                      style: style.subtitleFontStyle.copyWith(fontSize: 16),
+                                    ),
                                   ],
                                 ),
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "${1500 - value.value.round()}",
-                                        style: style.titleFontStyle.copyWith(fontSize: 42),
-                                      ),
-                                      Text(
-                                        "kcal left".toUpperCase(),
-                                        style: style.subtitleFontStyle.copyWith(fontSize: 16),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          SizedBox(
-                            width: 100,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "${value.value.round()}",
-                                  style: style.titleFontStyle,
-                                ),
-                                Text(
-                                  "So far".toUpperCase(),
-                                  style: style.subtitleFontStyle,
-                                ),
-                              ],
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 24,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${value.value.round()}",
+                              style: style.titleFontStyle,
+                            ),
+                            Text(
+                              "So far".toUpperCase(),
+                              style: style.subtitleFontStyle,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
@@ -255,10 +245,10 @@ class MacroCard extends StatelessWidget {
               ),
               SimpleCircularProgressBar(
                 progressColors: [
-                  style.secondaryColor,
-                  style.emphasisColor,
+                  Color.fromARGB(255, 107, 178, 236),
+                  style.primaryColor,
                 ],
-                backColor: style.primaryColor,
+                backColor: style.emphasisColor,
                 valueNotifier: _value,
                 progressStrokeWidth: 5,
                 backStrokeWidth: 3,
@@ -271,7 +261,7 @@ class MacroCard extends StatelessWidget {
                   ));
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Text(
